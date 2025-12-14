@@ -3,7 +3,7 @@
 
 // Site: https://mugomes.github.io
 
-package helpers
+package mgsmartflow
 
 import (
 	"fyne.io/fyne/v2"
