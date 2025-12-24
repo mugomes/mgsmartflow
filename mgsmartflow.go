@@ -166,7 +166,6 @@ func (l *SmartFlowLayout) Layout(objects []fyne.CanvasObject, size fyne.Size) {
 }
 
 /* MinSize */
-
 func (l *SmartFlowLayout) MinSize(objects []fyne.CanvasObject) fyne.Size {
 	l.prepareRows()
 
