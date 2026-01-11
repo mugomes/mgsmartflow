@@ -1,64 +1,116 @@
 # MGSmartFlow
 
-MGSmartFlow é um layout flexível para Fyne que distribui widgets em linhas, calculando tamanhos e espaçamentos automaticamente.
+`MGSmartFlow` é um **layout customizado para Fyne** que facilita a criação de interfaces dinâmicas baseadas em **linhas e colunas**, com controle inteligente de espaçamento, redimensionamento e posicionamento de widgets.
 
-## Instalação
+Ele foi projetado para simplificar layouts complexos sem depender apenas dos layouts padrões do Fyne.
 
-`go get github.com/mugomes/mgsmartflow`
+---
 
-## Documentação
+## ✨ Recursos
 
-O MGSmartFlow foi desenvolvido para respeitar o tamanho da largura e altura da janela, portanto, caso o texto for muito longo, o mesmo será cortado e não exibirá a outra parte até que você aumente a janela ou use wrap para quebrar o texto.
+* 📐 Layout por **linhas** e **colunas**
+* 📏 Redimensionamento automático ou fixo por widget
+* 🧭 Posicionamento manual opcional
+* ↔️ Espaçamento global ou individual
+* 🔄 Atualização dinâmica do layout
+* 🧩 Wrapper simples para uso direto
 
-**Exemplo de Uso**
+---
 
+## 📦 Instalação
+
+```bash
+go get github.com/mugomes/mgsmartflow
 ```
+
+---
+
+## 🚀 Uso Básico
+
+### Criando o SmartFlow
+
+```go
 flow := mgsmartflow.New()
-
-/* Define o gap padrão para todas as linhas e colunas */
-flow.SetGlobalGap(10, 8)
-
-/* Label */
-lbl1 := widget.NewLabel("Exemplo de Linha")
-flow.AddRow(lbl1)
-	
-/* Botões em Colunas */
-a := widget.NewButton("A", nil)
-b := widget.NewButton("B", nil)
-flow.AddColumn(a, b)
-
-/* Redimensiona as colunas */
-flow.SetResize(a, fyne.NewSize(120, 40))
-flow.SetResize(b, fyne.NewSize(120, 40))
-
-/* Ajusta o gap do button B */
-flow.SetGap(b, fyne.NewPos(30, 0))
-
-window.SetContent(flow.Container)
 ```
 
-O SetResize e SetGap podem ser utilizados para ajustar linhas e colunas, o Gap afeta sempre o que vem na frente e não antes.
+### Adicionando uma linha
 
-- Caso o SetResize não seja definido, será aplicado o espaço total da largura da janela ou da coluna.
-- Caso o SetGap não seja definido, será aplicado automaticamente um espaço por padrão.
+```go
+flow.AddRow(widget.NewLabel("Linha única"))
+```
 
-## Information
+### Adicionando colunas na mesma linha
 
- - [Page MGSmartFlow](https://github.com/mugomes/mgsmartflow)
+```go
+flow.AddColumn(
+	widget.NewButton("Botão 1", nil),
+	widget.NewButton("Botão 2", nil),
+)
+```
 
-## Requirement
+---
 
- - Go 1.24.6
- - Fyne 2.7.1
+## 📐 Controle de Layout
 
-## Support
+### Redimensionar um widget
 
-- GitHub: https://github.com/sponsors/mugomes
-- More: https://www.mugomes.com.br/p/apoie.html
+```go
+flow.Resize(btn, 120, 40)
+```
+
+### Mover manualmente um widget
+
+```go
+flow.Move(btn, 10, 20)
+```
+
+### Espaçamento individual entre widgets
+
+```go
+flow.Gap(btn, 15, 10)
+```
+
+### Espaçamento global do layout
+
+```go
+flow.GlobalGap(10, 10)
+```
+
+---
+
+## ⚠️ Funções Depreciadas
+
+As funções abaixo ainda funcionam, mas foram mantidas apenas por compatibilidade:
+
+* `SetResize` → use `Resize`
+* `SetMove` → use `Move`
+* `SetGap` → use `Gap`
+* `SetGlobalGap` → use `GlobalGap`
+
+Essas funções serão removidas na versão 1.2.0
+
+---
+
+## 🧩 Compatibilidade
+
+* Go 1.25.5+
+* Fyne 2.7.1
+
+---
+
+## 👤 Autor
+
+**Murilo Gomes Julio**
+
+🔗 [https://mugomes.github.io](https://mugomes.github.io)
+
+📺 [https://youtube.com/@mugomesoficial](https://youtube.com/@mugomesoficial)
+
+---
 
 ## License
 
-Copyright (c) 2025 Murilo Gomes Julio
+Copyright (c) 2025-2026 Murilo Gomes Julio
 
 Licensed under the [MIT](https://github.com/mugomes/mgsmartflow/blob/main/LICENSE) license.
 
