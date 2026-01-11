@@ -1,7 +1,7 @@
-// Copyright (C) 2025 Murilo Gomes Julio
+// Copyright (C) 2025-2026 Murilo Gomes Julio
 // SPDX-License-Identifier: MIT
 
-// Site: https://www.mugomes.com.br
+// Site: https://mugomes.github.io
 
 package mgsmartflow
 
@@ -31,7 +31,7 @@ type SmartFlowLayout struct {
 	gapY float32
 }
 
-func NewSmartFlowLayout() *SmartFlowLayout {
+func newSmartFlowLayout() *SmartFlowLayout {
 	return &SmartFlowLayout{
 		meta: make(map[fyne.CanvasObject]*flowMeta),
 		gapX: 7,
@@ -234,7 +234,7 @@ type SmartFlow struct {
 }
 
 func New() *SmartFlow {
-	layout := NewSmartFlowLayout()
+	layout := newSmartFlowLayout()
 	return &SmartFlow{
 		Container: container.New(layout),
 		Layout:    layout,
@@ -242,7 +242,6 @@ func New() *SmartFlow {
 }
 
 /* Publico */
-
 func (s *SmartFlow) AddRow(obj fyne.CanvasObject) {
 	s.Layout.AddRow(obj)
 	s.Container.Add(obj)
@@ -257,22 +256,50 @@ func (s *SmartFlow) AddColumn(objs ...fyne.CanvasObject) {
 	s.Container.Refresh()
 }
 
+// Deprecated: Use Resize
 func (s *SmartFlow) SetResize(obj fyne.CanvasObject, size fyne.Size) {
 	s.Layout.SetResize(obj, size)
 	s.Container.Refresh()
 }
 
+// Nova Função
+func (s *SmartFlow) Resize(obj fyne.CanvasObject, width, height float32) {
+	s.Layout.SetResize(obj, fyne.NewSize(width, height))
+	s.Container.Refresh()
+}
+
+// Deprecated: Use Move
 func (s *SmartFlow) SetMove(obj fyne.CanvasObject, pos fyne.Position) {
 	s.Layout.SetMove(obj, pos)
 	s.Container.Refresh()
 }
 
+// Nova Função
+func (s *SmartFlow) Move(obj fyne.CanvasObject, x, y float32) {
+	s.Layout.SetMove(obj, fyne.NewPos(x, y))
+	s.Container.Refresh()
+}
+
+// Deprecated: Use Gap
 func (s *SmartFlow) SetGap(obj fyne.CanvasObject, gap fyne.Position) {
 	s.Layout.SetGap(obj, gap)
 	s.Container.Refresh()
 }
 
+// Nova Função
+func (s *SmartFlow) Gap(obj fyne.CanvasObject, x, y float32) {
+	s.Layout.SetGap(obj, fyne.NewPos(x, y))
+	s.Container.Refresh()
+}
+
+// Deprecated: Use GlobalGap
 func (s *SmartFlow) SetGlobalGap(x, y float32) {
+	s.Layout.SetGlobalGap(x, y)
+	s.Container.Refresh()
+}
+
+// Nova Função
+func (s *SmartFlow) GlobalGap(x, y float32) {
 	s.Layout.SetGlobalGap(x, y)
 	s.Container.Refresh()
 }
